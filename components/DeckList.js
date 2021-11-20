@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { handleInitialData } from '../actions/action'
 import { blue, orange } from '../utilities/colors';
 import {ScrollView,View,Text,StyleSheet,TouchableOpacity} from 'react-native';
+import Deck from './Deck';
 
 export default function DeckList() {
 
      const dispatch = useDispatch()
-     const state = useSelector(state => state   )
+     const decks = useSelector(state => state)
 
      React.useEffect(() => {
          dispatch(handleInitialData())
@@ -20,20 +21,20 @@ export default function DeckList() {
 
         <Text style={styles.title}>Udacity Mobile Flashcards</Text>
 
-        {/* {
-        state.decks === null ? "Data Is Null" : Object.values(state).map(deck => {
+        {
+        decks === undefined ? "Data Is Null" : Object.values(decks).map(deckk => {
 
           return (
             <TouchableOpacity
-              key={deck.title}
+              key={deckk.title}
               onPress={() =>
-                navigation.navigate('DeckDetail', { title: deck.title })
+                navigation.navigate('DeckDetail', { title: deckk.title })
               }
             >
-              <Deck id={deck.title} />
+              <Deck id={deckk.title} />
             </TouchableOpacity>
           );
-        })}; */}
+        })}
         
 
         <View style={{ marginBottom: 30 }} />
