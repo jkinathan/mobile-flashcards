@@ -1,12 +1,7 @@
 import { RECEIVE_DECKS, ADD_DECK, REMOVE_DECK, ADD_CARD, RESET_STORE } from '../actions/action';
   import { decks as MydecksList } from '../utilities/_Data';
   
-
-  const initialState = {
-    decks: {},
-  };
-
-  const reducer = (state = initialState, action) => {
+  const decks = (state = {}, action) => {
     switch (action.type) {
       case RECEIVE_DECKS:
         return {
@@ -38,10 +33,11 @@ import { RECEIVE_DECKS, ADD_DECK, REMOVE_DECK, ADD_CARD, RESET_STORE } from '../
         };
         case RESET_STORE:
           return MydecksList;
+        
       default:
         return state;
     }
   }
 
 
-  export default reducer
+  export default decks;

@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { handleInitialData } from '../actions/action';
+import { connect } from 'react-redux';
 
 export class TestCompo extends Component {
   
+  componentDidMount(){
+    console.log("Component Mounteddd.....")
+    this.props.handleInitialData();
+    this.props.deck  === undefined ? console.log("no data") : console.log(this.props.decks);
+    // console.log("Dattaa",this.props.decks);
+  }
 
     render() {
       
@@ -21,3 +29,13 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
   });
+
+const mapStateToProps = (state) => ({ decks: state });
+
+const mapDispatchToProps = (dispatch) => (
+    {
+        handleInitialData: () => dispatch(handleInitialData()),
+    }
+)
+
+export default connect(mapStateToProps,mapDispatchToProps)(TestCompo);

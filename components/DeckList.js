@@ -4,26 +4,29 @@ import { connect } from 'react-redux';
 import Deck from './Deck';
 import { blue, orange } from '../utilities/colors';
 import { handleInitialData } from '../actions/action';
-import { getAllDecks } from '../actions/action';
 
 export class DeckList extends Component {
   
   componentDidMount() {
-    this.props.handleInitialData();
+    console.log("Component Mounted from DeckList")
+    
+    this.props.handleInitialData;
+    console.log(this.state)
   }
 
   render() {
     const { decks, navigation } = this.props;
 
     console.log("We are here decks")
-    console.log("My data:",decks)
+    console.log("My data:",this.props.decks)
 
     return (
       <ScrollView style={styles.container}>
 
         <Text style={styles.title}>Udacity Mobile Flashcards</Text>
 
-        {Object.values(decks).map(deck => {
+        {/* {
+        this.props.decks === null ? "Data Is Null" : Object.values(decks).map(deck => {
 
           return (
             <TouchableOpacity
@@ -35,7 +38,8 @@ export class DeckList extends Component {
               <Deck id={deck.title} />
             </TouchableOpacity>
           );
-        })}
+        })}; */}
+        
 
         <View style={{ marginBottom: 30 }} />
 
@@ -61,12 +65,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => ({ decks: state });
+// const mapStateToProps = (state) => ({ decks: "state.reducer.decks" });
+const mapStateToProps = state => ({ decks: state });
 
-const mapDispatchToProps = (dispatch) => (
-    {
-        handleInitialData: () => dispatch(handleInitialData()),
-    }
-)
 
-export default connect(mapStateToProps,mapDispatchToProps)(DeckList);
+export default connect(mapStateToProps,{handleInitialData})(DeckList);

@@ -42,7 +42,7 @@ export function resetStore() {
 }
 export function handleInitialData() {
   return dispatch => {
-
+    
     return getDecks().then(decks => {
 
       dispatch(receiveDecks(decks));
@@ -50,3 +50,15 @@ export function handleInitialData() {
     });
   };
 }
+
+// export const handleInitialData = () => async(dispatch) => {
+//   try {
+//       getDecks().then(decks => {
+//           dispatch(receiveDecks(decks))
+//       })
+//       // console.log("Handled")
+//   } 
+//   catch(error) {
+//       console.error('Error reading decks', error);
+//   }
+// }

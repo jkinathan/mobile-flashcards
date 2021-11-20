@@ -17,10 +17,12 @@ export function getDecksOld() {
   
 }
 
+
 export async function getDecks() {
   try {
     const storeResults = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
 
+    
     if (storeResults === null) {
       AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks));
     }
