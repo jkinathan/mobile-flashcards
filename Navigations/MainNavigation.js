@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DeckList } from '../components/DeckList';
+import  DeckList  from '../components/DeckList';
 import {FontAwesome5} from 'react-native-vector-icons';
 import { TestCompo } from '../components/TestComponent';
 

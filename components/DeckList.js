@@ -1,32 +1,27 @@
-import React, { Component } from 'react';
-import {ScrollView,View,Text,StyleSheet,TouchableOpacity} from 'react-native';
-import { connect } from 'react-redux';
-import Deck from './Deck';
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { handleInitialData } from '../actions/action'
 import { blue, orange } from '../utilities/colors';
-import { handleInitialData } from '../actions/action';
+import {ScrollView,View,Text,StyleSheet,TouchableOpacity} from 'react-native';
 
-export class DeckList extends Component {
-  
-  componentDidMount() {
-    console.log("Component Mounted from DeckList")
-    
-    this.props.handleInitialData;
-    console.log(this.state)
-  }
+export default function DeckList() {
 
-  render() {
-    const { decks, navigation } = this.props;
+     const dispatch = useDispatch()
+     const state = useSelector(state => state   )
 
-    console.log("We are here decks")
-    console.log("My data:",this.props.decks)
-
+     React.useEffect(() => {
+         dispatch(handleInitialData())
+        //  console.log("Use Effect")
+     }, [])
+     
     return (
-      <ScrollView style={styles.container}>
+        
+        <ScrollView style={styles.container}>
 
         <Text style={styles.title}>Udacity Mobile Flashcards</Text>
 
         {/* {
-        this.props.decks === null ? "Data Is Null" : Object.values(decks).map(deck => {
+        state.decks === null ? "Data Is Null" : Object.values(state).map(deck => {
 
           return (
             <TouchableOpacity
@@ -44,29 +39,22 @@ export class DeckList extends Component {
         <View style={{ marginBottom: 30 }} />
 
       </ScrollView>
-    );
-  }
+    )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 16,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingBottom: 16,
-    backgroundColor: blue
-  },
-  title: {
-    fontSize: 40,
-    textAlign: 'center',
-    marginBottom: 16,
-    color: orange
-  }
-});
-
-// const mapStateToProps = (state) => ({ decks: "state.reducer.decks" });
-const mapStateToProps = state => ({ decks: state });
-
-
-export default connect(mapStateToProps,{handleInitialData})(DeckList);
+    container: {
+      flex: 1,
+      paddingTop: 16,
+      paddingLeft: 16,
+      paddingRight: 16,
+      paddingBottom: 16,
+      backgroundColor: blue
+    },
+    title: {
+      fontSize: 40,
+      textAlign: 'center',
+      marginBottom: 16,
+      color: orange
+    }
+  });
