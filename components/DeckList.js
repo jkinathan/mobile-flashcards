@@ -4,8 +4,14 @@ import { handleInitialData } from '../actions/action'
 import { blue, orange } from '../utilities/colors';
 import {ScrollView,View,Text,StyleSheet,TouchableOpacity} from 'react-native';
 import Deck from './Deck';
+import DeckDetail from './DeckDetail';
+// import {useNavigation} from '@react-navigation/native';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function DeckList() {
+// import { NavigationContainer } from '@react-navigation/native';
+
+export default function DeckList(props) {
 
      const dispatch = useDispatch()
      const decks = useSelector(state => state)
@@ -14,9 +20,12 @@ export default function DeckList() {
          dispatch(handleInitialData())
         //  console.log("Use Effect")
      }, [])
-     
+
+     //const navigation = useNavigation();
+
     return (
         
+
         <ScrollView style={styles.container}>
 
         <Text style={styles.title}>Udacity Mobile Flashcards</Text>
@@ -27,11 +36,10 @@ export default function DeckList() {
           return (
             <TouchableOpacity
               key={deckk.title}
-              onPress={() =>
-                navigation.navigate('DeckDetail', { title: deckk.title })
-              }
-            >
+              onPress={() => props.navigation.navigate("DeckDetail", { title: deckk.title })}>
+
               <Deck id={deckk.title} />
+
             </TouchableOpacity>
           );
         })}

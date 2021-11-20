@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import  DeckList  from '../components/DeckList';
+import AddDeck from '../components/AddDeck';
 import {FontAwesome5} from 'react-native-vector-icons';
 import { TestCompo } from '../components/TestComponent';
 import { orange } from '../utilities/colors';
@@ -48,13 +49,7 @@ export default function MainNavigation() {
               )
             }
          })}
-          // tabBarOptions = {{
-          //   activeTintColor: "#f0f",
-          //   inactiveTintColor: "#555",
-          //   activeBackgroundColor: "#fff",
-          //   inactiveBackgroundColor: "#999",
-            
-          // }}
+         
           tabBarOptions= {{
             activeTintColor: "#f0f",
             style: {
@@ -83,7 +78,7 @@ export default function MainNavigation() {
          >
 
         <Tab.Screen name="DeckList" component={DeckList} />
-        <Tab.Screen name="Add Deck" component={DeckList} />
+        <Tab.Screen name="Add Deck" component={AddDeck} />
       </Tab.Navigator>
     </NavigationContainer>
   );

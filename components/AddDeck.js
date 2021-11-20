@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import TouchButton from './TouchButton';
-import { gray, green, white, textGray } from '../utilities/colors';
+import { gray, green, white, textGray, blue } from '../utilities/colors';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions/action';
 import { saveDeckTitleAS } from '../utilities/api';
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
     paddingBottom: 16,
-    backgroundColor: gray
+    backgroundColor: blue
   },
   block: {
     marginBottom: 20
