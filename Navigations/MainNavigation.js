@@ -4,17 +4,56 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import  DeckList  from '../components/DeckList';
 import AddDeck from '../components/AddDeck';
+import AddCard from '../components/AddCard';
 import {FontAwesome5} from 'react-native-vector-icons';
 import { TestCompo } from '../components/TestComponent';
 import { orange } from '../utilities/colors';
+import { createStackNavigator } from '@react-navigation/stack';
+import DeckDetail from '../components/DeckDetail';
+
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 
 export default function MainNavigation() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      <Stack.Navigator initialRouteName="DeckList"
+      
+      tabBarOptions= {{
+        activeTintColor: "#f0f",
+        style: {
+          height: 60,
+          backgroundColor: "#999",
+          shadowColor: 'rgba(0,0,0, 0.24)',
+          shadowOffset: {
+            width: 0,
+            height: 3
+          },
+          shadowRadius: 6,
+          shadowOpacity: 1,
+          borderTopWidth: 1,
+          borderTopColor: orange
+        },
+        labelStyle: {
+          fontSize: 12,
+          fontWeight: 'bold'
+        },
+        tabStyle: {
+          marginTop: 5,
+          marginBottom: 3
+        },
+        showIcon: true
+      }}>
+      {/* <Stack.Navigator initialRouteName="Home"> */}
+        <Stack.Screen name="DeckDetail" component={DeckDetail} />
+        {/* <Stack.Screen name="Notifications" component={Notifications} /> */}
+        <Stack.Screen name="DeckList" component={DeckList} />
+        <Stack.Screen name="Add Deck" component={AddDeck} />
+        <Stack.Screen name="AddCard" component={AddCard} />
+      </Stack.Navigator>
+      {/* <Tab.Navigator
        screenOptions={
         {
           "tabBarActiveTintColor": "#f0f",
@@ -79,7 +118,7 @@ export default function MainNavigation() {
 
         <Tab.Screen name="DeckList" component={DeckList} />
         <Tab.Screen name="Add Deck" component={AddDeck} />
-      </Tab.Navigator>
+      </Tab.Navigator> */}
     </NavigationContainer>
   );
 }

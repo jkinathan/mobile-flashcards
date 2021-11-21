@@ -4,12 +4,7 @@ import { handleInitialData } from '../actions/action'
 import { blue, orange } from '../utilities/colors';
 import {ScrollView,View,Text,StyleSheet,TouchableOpacity} from 'react-native';
 import Deck from './Deck';
-import DeckDetail from './DeckDetail';
-// import {useNavigation} from '@react-navigation/native';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-// import { NavigationContainer } from '@react-navigation/native';
+// import DeckDetail from './DeckDetail';
 
 export default function DeckList(props) {
 
@@ -18,7 +13,7 @@ export default function DeckList(props) {
 
      React.useEffect(() => {
          dispatch(handleInitialData())
-        //  console.log("Use Effect")
+        //  console.log("Use Effect",props)
      }, [])
 
      //const navigation = useNavigation();
@@ -36,7 +31,8 @@ export default function DeckList(props) {
           return (
             <TouchableOpacity
               key={deckk.title}
-              onPress={() => props.navigation.navigate("DeckDetail", { title: deckk.title })}>
+              
+              onPress={() => props.navigation.navigate("DeckDetail", { deck: deckk })}>
 
               <Deck id={deckk.title} />
 
