@@ -1,7 +1,7 @@
 import React from "react";
 import { getDeck } from "../utilities/api";
 import {Button, Text, View} from "react-native";
-import { getDeck2 } from "../utilities/api";
+
 
 export default class StartQuiz extends React.Component {
     constructor(props) {
@@ -15,15 +15,14 @@ export default class StartQuiz extends React.Component {
     }
 
     componentDidMount() {
-        const { route, navigation } = this.props;
-        console.log("Mounting....",route.params.deck.title)
+        const { route} = this.props;
+
         const deckID = route.params.deck.title;
         
         getDeck(deckID).then((deckk) => {
-          console.log("Get Deck",deckk.questions);
+
                 const questions = deckk.questions;
                 
-                this.shuffleQuestions(questions);
                 this.setState({questions: questions});
             }
         );
@@ -46,7 +45,7 @@ export default class StartQuiz extends React.Component {
                     </Text>
                     <Button
                         title={this.state.showQuestion ? 'Show Answer' : 'Show Question'}
-                        onPress={this.flipCard}
+                        onPress={this.flipQA}
                     />
                     <Button
                         title={'Correct'}
@@ -62,7 +61,7 @@ export default class StartQuiz extends React.Component {
             return (
                 <View>
                     <Text>
-                        That's the end of this deck!
+                        You have completed the deck questions!
                     </Text>
                     <Text>
                         Score: You have answered {Math.round(((this.state.correct)/this.state.questions.length)*100)}% Correct!
@@ -81,8 +80,8 @@ export default class StartQuiz extends React.Component {
                     <Button
                         title={'Back to Deck'}
                         onPress={() => {
-                            this.props.navigation.navigate('DeckOverview', {
-                                deckID: this.props.navigation.getParam('deckID', ''),
+                            this.props.navigation.navigate('DeckDetail', {
+                                deck: this.props.route.params.deck,
                             });
                         }}
                     />
@@ -91,7 +90,7 @@ export default class StartQuiz extends React.Component {
         }
     }
 
-    flipCard = () => {
+    flipQA = () => {
         this.setState(prevState => ({
             showQuestion: !prevState.showQuestion,
             correct: prevState.correct,
@@ -100,14 +99,6 @@ export default class StartQuiz extends React.Component {
         }));
     }
 
-    shuffleQuestions = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            let temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-        }
-    }
 
     markAsCorrect = () => {
         this.setState(prevState => ({

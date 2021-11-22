@@ -67,10 +67,6 @@ export async function getDeck(title) {
   }
 }
 
-export function getDeck2(title) {
-  return AsyncStorage.getItem(title);
-}
-
 export async function saveDeckTitleAS(title) {
   try {
     await AsyncStorage.mergeItem(
