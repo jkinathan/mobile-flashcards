@@ -28,7 +28,6 @@ export default class StartQuiz extends React.Component {
             }
         );
         clearLocalNotification().then(setLocalNotification);
-        // console.log("Notifications set..")
     }
 
     render() {

@@ -3,8 +3,6 @@ import { View, Text } from "react-native";
 import Styles from "../utilities/styles";
 import { useSelector } from "react-redux";
 import { TouchableOpacity } from "react-native";
-import { removeDeckAS } from "../utilities/api";
-import { removeDeck } from "../actions/action";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -21,14 +19,6 @@ const DeckDetail = ({ route, navigation }) => {
     cards = deck.deck.questions.length;
   }
   
-
-  const removeDDeck = id => {
-    
-    removeDeck(id);
-    removeDeckAS(id);
-    console.log("Deleteddd........",route.params)
-    navigation.goBack();
-  };
   
   useEffect(() => {
     
@@ -58,9 +48,7 @@ const DeckDetail = ({ route, navigation }) => {
         >
           <Text style={Styles.button}>Start Quiz</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => removeDDeck(deck.deck.title)}>
-          <Text style={[Styles.button, { color: "red", borderColor: "red" }]}>Delete Deck</Text>
-        </TouchableOpacity>
+        
       </View>
     </View>
   );

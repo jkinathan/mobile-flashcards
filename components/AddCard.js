@@ -14,7 +14,6 @@ const AddCard = ({ route, navigation }) => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
 
-  // console.log("Decker mine",route.params)
   const handleSubmit = () => {
 
     dispatch(addCardToDeck(deck.deck.title, { answer: answer, question: question }));

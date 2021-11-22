@@ -5,8 +5,6 @@ import { orange, white, textGray, blue } from '../utilities/colors';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions/action';
 import { saveDeckTitleAS } from '../utilities/api';
-import { StackActions, NavigationActions } from 'react-navigation';
-
 
 export class AddDeck extends Component {
   

@@ -14,7 +14,6 @@ export const clearLocalNotification = async ()=> {
       .then((data) => {
         if (data === null) {
 
-          // Permissions.askAsync(Permissions.NOTIFICATIONS)
           Notifications.requestPermissionsAsync()
             .then(({ status }) => {
               if (status === 'granted') {

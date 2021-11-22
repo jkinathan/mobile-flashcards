@@ -91,17 +91,6 @@ export async function saveDeckTitleAS(title) {
   }
 }
 
-export async function removeDeckAS(key) {
-  try {
-    const results = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
-    const data = JSON.parse(results);
-    data[key] = undefined;
-    delete data[key];
-    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data));
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 export async function addCardToDeckAS(title, card) {
   try {
