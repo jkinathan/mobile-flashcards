@@ -7,6 +7,7 @@ import { addDeck } from '../actions/action';
 import { saveDeckTitleAS } from '../utilities/api';
 import { StackActions, NavigationActions } from 'react-navigation';
 
+
 export class AddDeck extends Component {
   
   state = {
@@ -18,30 +19,20 @@ export class AddDeck extends Component {
   };
 
   handleSubmit = () => {
-    const { addDeck, navigation, route } = this.props;
+    const { addDeck, navigation } = this.props;
   
 
     addDeck(this.state.title);
     saveDeckTitleAS(this.state.title);
 
-    const resetAction = StackActions.reset({
-      index: 1,
-      actions: [
-        NavigationActions.navigate({ routeName: 'DeckList' }),
-        NavigationActions.navigate({
-          routeName: 'DeckDetail',
-          params: { deck: route.params.deck }
-        })
-      ]
-    });
-    navigation.dispatch(resetAction);
+    navigation.navigate("DeckList");
 
     this.setState(() => ({ title: '' }));
   };
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ height: 50 }} />
+        <View style={{ height: 60 }} />
         <View style={styles.block}>
           <Text style={styles.title}>What is the title of your new deck?</Text>
         </View>

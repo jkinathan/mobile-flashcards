@@ -67,6 +67,14 @@ export async function getDeck(title) {
   }
 }
 
+export const SubmitDeck = async (entry) => {
+  const result = await AsyncStorage.mergeItem(
+    DECKS_STORAGE_KEY,
+    JSON.stringify(entry)
+  );
+  return result;
+};
+
 export async function saveDeckTitleAS(title) {
   try {
     await AsyncStorage.mergeItem(

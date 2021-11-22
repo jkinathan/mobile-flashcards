@@ -14,6 +14,7 @@ const DeckDetail = ({ route, navigation }) => {
   const deck = route.params;
   const specDeck = useSelector((state) => state);
 
+  
   let cards = 0;
   
   if (route.params !== undefined) {
@@ -33,7 +34,7 @@ const DeckDetail = ({ route, navigation }) => {
     
     navigation.setOptions({ title: deck.deck.title });
 
-  }, [deck.deck.questions.length]);
+  }, [specDeck]);
 
   return (
     <View style={Styles.main}>

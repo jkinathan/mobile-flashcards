@@ -5,14 +5,19 @@ import { blue, orange } from '../utilities/colors';
 import {ScrollView,View,Text,StyleSheet,TouchableOpacity} from 'react-native';
 import Deck from './Deck';
 
-export default function DeckList(props) {
+
+const DeckList = (props) => {
 
      const dispatch = useDispatch()
      const decks = useSelector(state => state)
 
+     
      React.useEffect(() => {
          dispatch(handleInitialData())
+         
      }, [])
+
+    
 
     return (
         
@@ -40,6 +45,8 @@ export default function DeckList(props) {
         <View style={{ marginBottom: 30 }} />
 
       </ScrollView>
+
+      
     )
 }
 
@@ -59,3 +66,8 @@ const styles = StyleSheet.create({
       color: orange
     }
   });
+
+
+
+
+export default DeckList;

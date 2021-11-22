@@ -5,6 +5,7 @@ import { useState } from "react";
 import { addCardToDeck } from "../actions/action";
 import { useDispatch } from "react-redux";
 import { addCardToDeckAS } from "../utilities/api";
+import DeckList from "./DeckList";
 
 const AddCard = ({ route, navigation }) => {
   
@@ -20,7 +21,8 @@ const AddCard = ({ route, navigation }) => {
 
     addCardToDeckAS(deck.deck.title, { answer: answer, question: question });
     
-    navigation.goBack();
+    navigation.navigate("DeckList")
+
   };
 
   return (
