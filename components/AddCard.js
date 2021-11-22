@@ -1,121 +1,56 @@
-import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet } from 'react-native';
-import TouchButton from './TouchButton';
-import { gray, green } from '../utilities/colors';
-import { connect } from 'react-redux';
-import { addCardToDeck } from '../actions/action';
-import { addCardToDeckAS } from '../utilities/api';
+import React from "react";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import Styles from "../utilities/styles";
+import { useState } from "react";
+import { addCardToDeck } from "../actions/action";
+import { useDispatch } from "react-redux";
+import { addCardToDeckAS } from "../utilities/api";
 
-export class AddCard extends Component {
+const AddCard = ({ route, navigation }) => {
   
-  state = {
-    question: '',
-    answer: ''
+  const dispatch = useDispatch();
+  const { deck } = route.params;
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+
+  // console.log("Decker mine",route.params)
+  const handleSubmit = () => {
+
+    dispatch(addCardToDeck(deck.deck.title, { answer: answer, question: question }));
+
+    addCardToDeckAS(deck.deck.title, { answer: answer, question: question });
+    
+    navigation.navigate("DeckDetail", { deck: deck.deck });
   };
 
-  handleQuestionChange = question => {
-    this.setState({ question });
-  };
+  return (
 
-  handleAnswerChange = answer => {
-    this.setState({ answer });
-  };
-
-  handleSubmit = () => {
-
-    const { addCardToDeck, title, navigation } = this.props;
-    const card = {
-      question: this.state.question,
-      answer: this.state.answer
-    };
-
-    addCardToDeck(title, card);
-    addCardToDeckAS(title, card);
-
-    this.setState({ question: '', answer: '' });
-    navigation.goBack();
-  };
-  render() {
-    return (
-      <View style={styles.container}>
-        <View>
-          <View style={styles.block}>
-            <Text style={styles.title}>Add a question</Text>
-          </View>
-          <View style={[styles.block]}>
-            <TextInput
-              style={styles.input}
-              value={this.state.question}
-              onChangeText={this.handleQuestionChange}
-              placeholder="Question"
-              autoFocus={true}
-              returnKeyType="next"
-              onSubmitEditing={() => this.answerTextInput.focus()}
-              blurOnSubmit={false}
-            />
-          </View>
-          <View style={[styles.block]}>
-            <TextInput
-              style={styles.input}
-              value={this.state.answer}
-              onChangeText={this.handleAnswerChange}
-              placeholder="Answer"
-              ref={input => {
-                this.answerTextInput = input;
-              }}
-              returnKeyType="done"
-              onSubmitEditing={this.handleSubmit}
-            />
-          </View>
-          <TouchButton
-            btnStyle={{ backgroundColor: green, borderColor: '#fff' }}
-            onPress={this.handleSubmit}
-            disabled={this.state.question === '' || this.state.answer === ''}
-          >
-            Submit
-          </TouchButton>
+    <View style={Styles.main}>
+      <Text style={Styles.deckTexts}>Title: {deck.deck.title}</Text>
+      <View style={Styles.VerticalAlignCenter}>
+        <View style={{ marginBottom: 30 }}>
+          <TextInput
+            style={Styles.textInput}
+            value={question}
+            placeholder="Question"
+            onChangeText={(text) => setQuestion(text)}
+          />
         </View>
-        <View style={{ height: '30%' }} />
+
+        <View style={{ marginBottom: 30 }}>
+          <TextInput
+            style={Styles.textInput}
+            value={answer}
+            placeholder="Answer"
+            onChangeText={(text) => setAnswer(text)}
+          />
+        </View>
       </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 16,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingBottom: 16,
-    backgroundColor: gray,
-    justifyContent: 'space-around'
-  },
-  block: {
-    marginBottom: 20
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 32
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    backgroundColor: '#fff',
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderRadius: 5,
-    fontSize: 20,
-    height: 40
-  }
-});
-
-const mapStateToProps = (state, { navigation }) => {
-  const title = navigation.getParam('title', 'undefined');
-
-  return {
-    title
-  };
+      <TouchableOpacity style={{ marginBottom: 30 }} onPress={handleSubmit}>
+        <Text style={Styles.button}>Create Card</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
-export default connect(mapStateToProps,{ addCardToDeck })(AddCard);
+export default AddCard;

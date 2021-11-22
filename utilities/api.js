@@ -3,6 +3,29 @@ import { decks } from './_Data';
 
 const DECKS_STORAGE_KEY = 'MobileFlashcards:decks';
 
+export const ANSWER_KEY = new Date().getFullYear().toString() +
+  new Date().getMonth().toString() +
+  new Date().getDate().toString();
+
+export const AnswerQuestion = async ({ deck, question, passed }) => {
+  const key = deck + " " + question;
+  return await AsyncStorage.mergeItem(
+    ANSWER_KEY,
+    JSON.stringify({ [key]: passed })
+  );
+};
+
+export const ClearAnswer =async (key)=>{
+
+  const answers = await JSON.parse(await AsyncStorage.getItem(ANSWER_KEY));
+  const seletedAnswers = Object.keys(answers).filter((s) => s.startsWith(key));
+  seletedAnswers.map((s) => {
+    answers[s] = undefined;
+    delete answers[s];
+  });
+  await AsyncStorage.setItem(ANSWER_KEY, JSON.stringify(answers));
+}
+
 export function getData() {
   return decks;
 }
@@ -34,14 +57,18 @@ export async function getDecks() {
   }
 }
 
-export async function getDeck(id) {
+export async function getDeck(title) {
   try {
     const storeResults = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
 
-    return JSON.parse(storeResults)[id];
+    return JSON.parse(storeResults)[title];
   } catch (error) {
     console.log(error);
   }
+}
+
+export function getDeck2(title) {
+  return AsyncStorage.getItem(title);
 }
 
 export async function saveDeckTitleAS(title) {

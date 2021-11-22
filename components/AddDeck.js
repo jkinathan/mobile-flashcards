@@ -10,27 +10,27 @@ import { StackActions, NavigationActions } from 'react-navigation';
 export class AddDeck extends Component {
   
   state = {
-    text: ""
+    title: ""
   };
 
-  handleChange = text => {
-    this.setState({ text });
+  handleChange = (title) => {
+    this.setState({ title });
   };
 
   handleSubmit = () => {
     const { addDeck, navigation } = this.props;
-    const { text } = this.state;
+  
 
-    addDeck(text);
-    saveDeckTitleAS(text);
+    addDeck(this.state.title);
+    saveDeckTitleAS(this.state.title);
 
     const resetAction = StackActions.reset({
       index: 1,
       actions: [
-        NavigationActions.navigate({ routeName: 'Home' }),
+        NavigationActions.navigate({ routeName: 'DeckList' }),
         NavigationActions.navigate({
           routeName: 'DeckDetail',
-          params: { title: text }
+          params: { title: this.state.title }
         })
       ]
     });

@@ -52,30 +52,3 @@ export function handleInitialData() {
   };
 }
 
-// export const handleInitialData = () => async(dispatch) => {
-//   try {
-//     console.log("Handling Decks")
-//       getDecks().then(decks => {
-//           dispatch(receiveDecks(decks))
-//       })
-//       console.log("Handled")
-//   } 
-//   catch(error) {
-//       console.error('Error reading decks', error);
-//   }
-// }
-
-export const myFunction = _ => {
-return async (dispatch)=>{
-
-  getDecks().then(decks => {
-    console.log("decks", decks)
-
-    dispatch(receiveDecks(decks));
-    
-  }).catch(error=>{
-    console.log(`error`, error)
-  } )
-  console.log("I am here", )
-}
-}
