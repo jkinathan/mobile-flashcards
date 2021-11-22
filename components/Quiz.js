@@ -1,8 +1,9 @@
 import React from "react";
 import { getDeck } from "../utilities/api";
 import {Button, Text, View} from "react-native";
-
-
+import Styles from "../utilities/styles";
+import { setLocalNotification,clearLocalNotification } from "../utilities/helpers";
+import { TouchableOpacity } from "react-native";
 export default class StartQuiz extends React.Component {
     constructor(props) {
         super(props);
@@ -29,62 +30,96 @@ export default class StartQuiz extends React.Component {
     }
 
     render() {
-        if(this.state.questions === null || this.state.questions === undefined) {
+        if(this.state.questions === null || this.state.questions === undefined) 
+        {
             return null;
-        } else if(this.state.questions.length === 0) {
-            return (<View><Text>There is no question in this deck :(</Text></View>);
-        } else if (this.state.questions.length !== this.state.indexAt) {
+        } 
+        else if(this.state.questions.length === 0) 
+        {
+            return (
+            <View style={Styles.VerticalAlignCenter}>
+              <Text style={Styles.deckTexts}>There is no question card in the current deck...</Text>
+            </View>);
+        } 
+        else if (this.state.questions.length !== this.state.indexAt) 
+        {
             const question = this.state.questions[this.state.indexAt];
             return (
-                <View>
-                    <Text>
+                <View style={Styles.VerticalAlignCenter}>
+                    <Text style={Styles.deckTexts}>
                         Your Progress {this.state.indexAt+1} of {this.state.questions.length}
                     </Text>
-                    <Text>
-                        {this.state.showQuestion ? question.question : question.answer}
-                    </Text>
-                    <Button
-                        title={this.state.showQuestion ? 'Show Answer' : 'Show Question'}
+
+                    <View style={Styles.VerticalAlignCenter}>
+                      {this.state.showQuestion ? (
+                        <Text style={Styles.deckTexts}>{question.question}</Text>
+                      ) : (
+                        <Text style={Styles.deckTexts}>{question.answer}</Text>
+                      )}
+                      <TouchableOpacity
                         onPress={this.flipQA}
-                    />
-                    <Button
-                        title={'Correct'}
-                        onPress={this.markAsCorrect}
-                    />
-                    <Button
-                        title={'Incorrect'}
-                        onPress={this.pushIncorrect}
-                    />
+                      >
+                        {this.state.showQuestion ? (
+                          <Text style={Styles.subButton}>Show Answer</Text>
+                        ) : (
+                          <Text style={Styles.subButton}>Show Question</Text>
+                        )}
+                      </TouchableOpacity>
+                    </View>
+
+                    <View style={{ marginBottom: 50 }}>
+
+                      <TouchableOpacity onPress={this.markAsCorrect}>
+                        <Text style={Styles.button}>Correct</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity onPress={this.pushIncorrect}>
+                        <Text
+                          style={[Styles.button, { color: "red", borderColor: "red" }]}
+                        >
+                          Incorrect
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+
                 </View>
             )
-        } else {
+        } 
+        else {
             return (
-                <View>
-                    <Text>
-                        You have completed the deck questions!
+              
+              <View style={Styles.VerticalAlignCenter}>
+                    <Text style={Styles.deckTexts}>
+                        You have successfully completed the deck questions!
                     </Text>
-                    <Text>
+                    <Text style={Styles.deckTexts}>
                         Score: You have answered {Math.round(((this.state.correct)/this.state.questions.length)*100)}% Correct!
                     </Text>
-                    <Button
-                        title={'Restart Quiz'}
-                        onPress={() => {
+
+
+                    <TouchableOpacity onPress={() => {
                             
                             this.setState({
                                 correct: 0,
                                 indexAt: 0,
                                 showQuestion: true,
                             });
-                        }}
-                    />
-                    <Button
-                        title={'Back to Deck'}
-                        onPress={() => {
+                            this.Notify;
+                        }}>
+                      <Text style={Styles.button}>Restart Quiz</Text>
+
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
                             this.props.navigation.navigate('DeckDetail', {
                                 deck: this.props.route.params.deck,
                             });
-                        }}
-                    />
+                            }}>
+                      <Text
+                        style={[Styles.button, { color: "gray", borderColor: "gray" }]}
+                      >
+                        Back to Deck
+                      </Text>
+                    </TouchableOpacity>
                 </View>
             );
         }
@@ -117,4 +152,10 @@ export default class StartQuiz extends React.Component {
             questions: prevState.questions,
         }));
     }
+
+  Notify = () => {
+    clearLocalNotification();
+    setLocalNotification();
+    console.log("Notifications set")
+  }
 }
