@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import TouchButton from './TouchButton';
-import { gray, green, white, textGray, blue } from '../utilities/colors';
+import { orange, white, textGray, blue } from '../utilities/colors';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions/action';
 import { saveDeckTitleAS } from '../utilities/api';
@@ -18,7 +18,7 @@ export class AddDeck extends Component {
   };
 
   handleSubmit = () => {
-    const { addDeck, navigation } = this.props;
+    const { addDeck, navigation, route } = this.props;
   
 
     addDeck(this.state.title);
@@ -30,25 +30,25 @@ export class AddDeck extends Component {
         NavigationActions.navigate({ routeName: 'DeckList' }),
         NavigationActions.navigate({
           routeName: 'DeckDetail',
-          params: { title: this.state.title }
+          params: { deck: route.params.deck }
         })
       ]
     });
     navigation.dispatch(resetAction);
 
-    this.setState(() => ({ text: '' }));
+    this.setState(() => ({ title: '' }));
   };
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ height: 60 }} />
+        <View style={{ height: 50 }} />
         <View style={styles.block}>
           <Text style={styles.title}>What is the title of your new deck?</Text>
         </View>
         <View style={[styles.block]}>
           <TextInput
             style={styles.input}
-            value={this.state.text}
+            value={this.state.title}
             onChangeText={this.handleChange}
             placeholder="Deck Name"
             autoFocus={true}
@@ -57,12 +57,13 @@ export class AddDeck extends Component {
           />
         </View>
         <TouchButton
-          btnStyle={{ backgroundColor: green, borderColor: white }}
+          btnStyle={{ backgroundColor: orange, borderColor: blue }}
           onPress={this.handleSubmit}
-          disabled={this.state.text === ''}
+          disabled={this.state.title === ''}
         >
           Create Deck
         </TouchButton>
+        
       </View>
     );
   }

@@ -6,7 +6,6 @@ import  DeckList  from '../components/DeckList';
 import AddDeck from '../components/AddDeck';
 import AddCard from '../components/AddCard';
 import {FontAwesome5} from 'react-native-vector-icons';
-import { TestCompo } from '../components/TestComponent';
 import { orange } from '../utilities/colors';
 import { createStackNavigator } from '@react-navigation/stack';
 import DeckDetail from '../components/DeckDetail';
@@ -20,18 +19,15 @@ const Stack = createStackNavigator();
 export default function MainNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="DeckList"
-      
-      >
-      {/* <Stack.Navigator initialRouteName="Home"> */}
+      {/* <Stack.Navigator initialRouteName="DeckList">
         <Stack.Screen name="DeckDetail" component={DeckDetail} />
         <Stack.Screen name="DeckList" component={DeckList} />
         <Stack.Screen name="Add Deck" component={AddDeck} />
         <Stack.Screen name="AddCard" component={AddCard} />
         <Stack.Screen name="StartQuiz" component={StartQuiz} />
 
-      </Stack.Navigator>
-      {/* <Tab.Navigator
+      </Stack.Navigator> */}
+      <Tab.Navigator
        screenOptions={
         {
           "tabBarActiveTintColor": "#f0f",
@@ -96,7 +92,7 @@ export default function MainNavigation() {
 
         <Tab.Screen name="DeckList" component={DeckList} />
         <Tab.Screen name="Add Deck" component={AddDeck} />
-      </Tab.Navigator> */}
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

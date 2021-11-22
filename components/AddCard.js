@@ -20,13 +20,13 @@ const AddCard = ({ route, navigation }) => {
 
     addCardToDeckAS(deck.deck.title, { answer: answer, question: question });
     
-    navigation.navigate("DeckDetail", { deck: deck.deck });
+    navigation.goBack();
   };
 
   return (
 
     <View style={Styles.main}>
-      <Text style={Styles.deckTexts}>Title: {deck.deck.title}</Text>
+      <Text style={Styles.deckTexts}>Add Question Card to: {deck.deck.title} Deck</Text>
       <View style={Styles.VerticalAlignCenter}>
         <View style={{ marginBottom: 30 }}>
           <TextInput
@@ -47,7 +47,7 @@ const AddCard = ({ route, navigation }) => {
         </View>
       </View>
       <TouchableOpacity style={{ marginBottom: 30 }} onPress={handleSubmit}>
-        <Text style={Styles.button}>Create Card</Text>
+        <Text style={Styles.button}>Submit</Text>
       </TouchableOpacity>
     </View>
   );

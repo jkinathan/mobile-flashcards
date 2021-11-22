@@ -3,11 +3,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import MainNavigation from './Navigations/MainNavigation';
+// import AppNavigation from './Navigations/AppNavigation';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-// import store from './store';
 
 const store = createStore(
   reducer,

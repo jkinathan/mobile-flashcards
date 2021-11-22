@@ -4,7 +4,6 @@ import { handleInitialData } from '../actions/action'
 import { blue, orange } from '../utilities/colors';
 import {ScrollView,View,Text,StyleSheet,TouchableOpacity} from 'react-native';
 import Deck from './Deck';
-// import DeckDetail from './DeckDetail';
 
 export default function DeckList(props) {
 
@@ -13,10 +12,7 @@ export default function DeckList(props) {
 
      React.useEffect(() => {
          dispatch(handleInitialData())
-        //  console.log("Use Effect",props)
      }, [])
-
-     //const navigation = useNavigation();
 
     return (
         

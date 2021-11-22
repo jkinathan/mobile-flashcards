@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { blue, orange } from "./colors";
 
 const Styles = StyleSheet.create({
   container: {
@@ -17,6 +18,7 @@ const Styles = StyleSheet.create({
   deckTexts: {
     fontSize: 25,
     textAlign: "center",
+    color: orange,
   },
 
   cards: {
@@ -47,14 +49,14 @@ const Styles = StyleSheet.create({
     alignSelf: "center",
   },
   button: {
-    borderColor: "#61dafd",
+    borderColor: blue,
     borderWidth: 2,
     width: 150,
     marginTop: 20,
     padding: 10,
     textAlign: "center",
     borderRadius: 5,
-    color: "#3197fd",
+    color: orange,
     alignSelf: "center",
   },
   delete: {

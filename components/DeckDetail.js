@@ -58,7 +58,7 @@ const DeckDetail = ({ route, navigation }) => {
           <Text style={Styles.button}>Start Quiz</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => removeDDeck(deck.deck.title)}>
-          <Text style={Styles.delete}>Delete Deck</Text>
+          <Text style={[Styles.button, { color: "red", borderColor: "red" }]}>Delete Deck</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -2,7 +2,7 @@ import React from "react";
 import { getDeck } from "../utilities/api";
 import {Button, Text, View} from "react-native";
 import Styles from "../utilities/styles";
-import { setLocalNotification,clearLocalNotification } from "../utilities/helpers";
+import { setLocalNotification,clearLocalNotification } from "../utilities/helpers.js";
 import { TouchableOpacity } from "react-native";
 export default class StartQuiz extends React.Component {
     constructor(props) {
@@ -90,7 +90,10 @@ export default class StartQuiz extends React.Component {
               
               <View style={Styles.VerticalAlignCenter}>
                     <Text style={Styles.deckTexts}>
-                        You have successfully completed the deck questions!
+                      
+                        You have successfully completed the {this.props.route.params.deck.title} deck questions!
+                      
+                        
                     </Text>
                     <Text style={Styles.deckTexts}>
                         Score: You have answered {Math.round(((this.state.correct)/this.state.questions.length)*100)}% Correct!
