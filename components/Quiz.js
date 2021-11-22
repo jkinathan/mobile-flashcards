@@ -27,6 +27,8 @@ export default class StartQuiz extends React.Component {
                 this.setState({questions: questions});
             }
         );
+        clearLocalNotification().then(setLocalNotification);
+        console.log("Notifications set")
     }
 
     render() {
@@ -38,7 +40,7 @@ export default class StartQuiz extends React.Component {
         {
             return (
             <View style={Styles.VerticalAlignCenter}>
-              <Text style={Styles.deckTexts}>There is no question card in the current deck...</Text>
+              <Text style={Styles.deckTexts}>There is no question card in the {this.props.route.params.deck.title} deck Please go back and add a card.</Text>
             </View>);
         } 
         else if (this.state.questions.length !== this.state.indexAt) 
@@ -107,7 +109,7 @@ export default class StartQuiz extends React.Component {
                                 indexAt: 0,
                                 showQuestion: true,
                             });
-                            this.Notify;
+                            
                         }}>
                       <Text style={Styles.button}>Restart Quiz</Text>
 
@@ -156,9 +158,5 @@ export default class StartQuiz extends React.Component {
         }));
     }
 
-  Notify = () => {
-    clearLocalNotification();
-    setLocalNotification();
-    console.log("Notifications set")
-  }
+  
 }

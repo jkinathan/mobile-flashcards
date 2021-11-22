@@ -19,15 +19,15 @@ const Stack = createStackNavigator();
 export default function MainNavigation() {
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator initialRouteName="DeckList">
+      <Stack.Navigator initialRouteName="DeckList">
         <Stack.Screen name="DeckDetail" component={DeckDetail} />
         <Stack.Screen name="DeckList" component={DeckList} />
         <Stack.Screen name="Add Deck" component={AddDeck} />
         <Stack.Screen name="AddCard" component={AddCard} />
         <Stack.Screen name="StartQuiz" component={StartQuiz} />
 
-      </Stack.Navigator> */}
-      <Tab.Navigator
+      </Stack.Navigator>
+      {/* <Tab.Navigator
        screenOptions={
         {
           "tabBarActiveTintColor": "#f0f",
@@ -92,7 +92,7 @@ export default function MainNavigation() {
 
         <Tab.Screen name="DeckList" component={DeckList} />
         <Tab.Screen name="Add Deck" component={AddDeck} />
-      </Tab.Navigator>
+      </Tab.Navigator> */}
     </NavigationContainer>
   );
 }
