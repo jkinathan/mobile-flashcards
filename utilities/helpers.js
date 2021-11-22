@@ -1,5 +1,4 @@
 import * as Notifications from 'expo-notifications'
-import * as Permissions from 'expo-permissions';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const NOTIFICATION_KEY = 'NOTIFICATION_KEY';

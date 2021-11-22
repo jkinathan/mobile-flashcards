@@ -33,7 +33,7 @@ const DeckDetail = ({ route, navigation }) => {
     
     navigation.setOptions({ title: deck.deck.title });
 
-  }, [specDeck]);
+  }, [deck.deck.questions.length]);
 
   return (
     <View style={Styles.main}>
