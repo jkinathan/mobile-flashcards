@@ -53,7 +53,7 @@ export default class StartQuiz extends React.Component {
                     />
                     <Button
                         title={'Incorrect'}
-                        onPress={this.progressOneQuestion}
+                        onPress={this.pushIncorrect}
                     />
                 </View>
             )
@@ -69,7 +69,7 @@ export default class StartQuiz extends React.Component {
                     <Button
                         title={'Restart Quiz'}
                         onPress={() => {
-                            this.shuffleQuestions(this.state.questions);
+                            
                             this.setState({
                                 correct: 0,
                                 indexAt: 0,
@@ -109,7 +109,7 @@ export default class StartQuiz extends React.Component {
         }));
     }
 
-    progressOneQuestion = () => {
+    pushIncorrect = () => {
         this.setState(prevState => ({
             indexAt: prevState.indexAt+1,
             showQuestion: true,
