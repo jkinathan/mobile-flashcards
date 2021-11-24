@@ -35,4 +35,4 @@ Once you have the Expo app on  your device, make sure your computer (running exp
 
 **Please note:** Once the app is running via `npm start`, ensure that in your browser, on http://localhost:19002/ that you see the words "Tunnel ready" *before* scanning and opening the QR Code. 
 
-Once you have scanned the code, your mobile device will open the app to the app home screen. 
+Once you have scanned the code, your mobile device will open the app to the app home screen that will display for you a list of decks and an add deck button where you can get started
